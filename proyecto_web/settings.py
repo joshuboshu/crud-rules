@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'productos_app', # Aplicación del proyecto
-    'widget_tweaks'
+    'widget_tweaks',
+    'rules', # Django rules
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'productos_app/static')]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
