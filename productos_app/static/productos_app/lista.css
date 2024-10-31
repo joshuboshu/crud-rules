@@ -1,0 +1,48 @@
+h1 {
+    margin-bottom: 20px; 
+    color: #007bff; 
+}
+
+/* Botón para agregar producto */
+.add-product {
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+}
+
+/* Lista de productos */
+.list-group-item {
+    border-radius: 0.5rem; 
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Detalles del producto */
+.product-details {
+    font-size: 1rem; 
+    color: #343a40; 
+}
+
+/* Acciones del producto */
+.product-actions {
+    display: flex;
+    gap: 10px; /* Espacio entre botones */
+}
+
+/* Botones de acciones del producto */
+.product-actions .btn {
+    border-radius: 0.25rem; 
+}
+
+/* Estilo para los badges */
+.badge {
+    font-size: 0.9rem; 
+    padding: 0.5rem; /* Espaciado interno */
+}
+
+.btn-success {
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+}
+
