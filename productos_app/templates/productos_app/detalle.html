@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load rules %} 
 
 {% block title %}Detalles del Producto{% endblock %}
 
@@ -31,16 +32,16 @@
                                     <span><strong>{{ caracteristica.nombre }}:</strong> {{ caracteristica.valor }}</span>
                                 </div>
                                 
-                                {% if user.has_perm 'productos_app.change_caracteristica' or user.has_perm 'productos_app.delete_caracteristica' %}
-                                    <div class="d-flex gap-2">
-                                        {% if user.has_perm 'productos_app.change_caracteristica' %}
-                                            <a href="{% url 'edit_caracteristica' caracteristica.id %}" class="btn btn-warning btn-sm">Editar</a>
-                                        {% endif %}
-                                        {% if user.has_perm 'productos_app.delete_caracteristica' %}
-                                            <a href="{% url 'delete_caracteristica' caracteristica.id %}" class="btn btn-danger btn-sm delete-characteristic">Eliminar</a>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
+                                {% has_perm "productos_app.change_caracteristica" user as can_change_caracteristica %}
+                                {% has_perm "productos_app.delete_caracteristica" user as can_delete_caracteristica %}
+                                <div class="d-flex gap-2">
+                                    {% if can_change_caracteristica %}
+                                        <a href="{% url 'edit_caracteristica' caracteristica.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                    {% endif %}
+                                    {% if can_delete_caracteristica %}
+                                        <a href="{% url 'delete_caracteristica' caracteristica.id %}" class="btn btn-danger btn-sm delete-characteristic">Eliminar</a>
+                                    {% endif %}
+                                </div>
                             </li>
                         {% endfor %}
                     </ul>
@@ -49,7 +50,8 @@
                 {% endif %}
                 
                 <div class="mt-4">
-                    {% if user.has_perm 'productos_app.add_caracteristica' %}
+                    {% has_perm "productos_app.add_caracteristica" user as can_add_caracteristica %}
+                    {% if can_add_caracteristica %}
                         <a href="{% url 'add_caracteristica' producto.id %}" class="btn btn-primary me-2">Agregar Característica</a>
                     {% endif %}
                     <a href="{% url 'list_products' %}" class="btn btn-secondary">Volver a la Lista de Productos</a>
