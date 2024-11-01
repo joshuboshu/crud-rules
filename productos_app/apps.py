@@ -1,6 +1,7 @@
 from django.apps import AppConfig
 
-
 class ProductosAppConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
     name = 'productos_app'
+
+    def ready(self):
+        import productos_app.rules  # Importa el archivo de reglas
