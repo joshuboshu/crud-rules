@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load rules %} 
 
 {% block title %}Agregar Producto{% endblock %}
 
@@ -13,7 +14,8 @@
             <div class="card-body">
                 <h1 class="card-title mb-4">Agregar Producto</h1>
                 
-                {% if user.has_perm 'productos_app.add_producto' %}
+                {% has_perm "productos_app.add_producto" user as can_add_producto %}
+                {% if can_add_producto %}
                     <form method="POST">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
