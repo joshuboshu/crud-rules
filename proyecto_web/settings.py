@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'productos_app', # Aplicación del proyecto
     'widget_tweaks',
     'rules', # Django rules
+    'user_rules',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

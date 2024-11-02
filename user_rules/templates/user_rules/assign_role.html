@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Asignar Roles{% endblock %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'user_rules/assign_roles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Asignar Roles a Usuarios</h1>
+    <div class="row">
+        {% for user in users %}
+        <div class="col-md-4">
+            <div class="user-card">
+                <h5>{{ user.username }}</h5>
+                <p>Email: {{ user.email }}</p>
+                <p>Rol Actual:
+                    {% if user.userrole and user.userrole.role %}
+                    {{ user.userrole.role.name }}
+                    {% else %}
+                    Sin Rol
+                    {% endif %}
+                </p>
+
+                <form method="post" class="role-dropdown" action="{% url 'assign_role' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <select name="role" class="form-select" aria-label="Select Role">
+                        {% for role in roles %}
+                        <option value="{{ role.name }}">{{ role.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2">Asignar Rol</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<script>
+   function assignRole(event, userId) {
+    event.preventDefault(); // Previene que el formulario se envíe de manera normal
+
+    const select = document.getElementById(`role-select-${userId}`);
+    const role = select.value; // Obtiene el valor seleccionado
+
+    fetch('/user_rules/assign-role/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'), // Asegúrate de tener esta función para obtener el token CSRF
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ user_id: userId, role: role }) // Envía el ID de usuario y el rol como JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.success);
+            // Aquí puedes actualizar el DOM si es necesario
+        } else {
+            alert(data.error);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+{% endblock %}

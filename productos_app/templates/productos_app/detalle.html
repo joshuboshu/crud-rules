@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h1 class="card-title mb-3">{{ producto.nombre }}</h1>
                 <p class="card-text mb-2"><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-                <p class="card-text mb-2"><strong>Precio:</strong> ${{ producto.precio }}</p>
+                <p class="card-text mb-2"><strong>Precio:</strong> ₲ {{ producto.precio }}</p>
                 <p class="card-text mb-4"><strong>Estado:</strong> 
                     {% if producto.disponible %}
                         <span class="badge bg-success">Disponible</span>

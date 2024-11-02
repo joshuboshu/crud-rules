@@ -9,17 +9,50 @@
     <link rel="stylesheet" href="{% static 'productos_app/base.css' %}">
     {% block extra_styles %}
     {% endblock %}
+    <style>
+        /* Estilos adicionales para el navbar */
+        .navbar {
+            background-color: #007bff;
+            padding: 1rem;
+        }
+        .navbar .navbar-brand,
+        .navbar .nav-link,
+        .navbar .navbar-text {
+            color: #fff;
+        }
+        .navbar .nav-link:hover {
+            color: #d9d9d9;
+        }
+        .navbar .nav-item .btn-link {
+            color: #fff;
+            text-decoration: none;
+        }
+        .navbar .btn-link:hover {
+            color: #d9d9d9;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light mb-4">
         <div class="container">
             <a class="navbar-brand" href="{% url 'list_products' %}">Mi Aplicación</a>
-            <div class="collapse navbar-collapse justify-content-end">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <span class="navbar-text me-2">Bienvenido, {{ user.username }}</span>
+                            <span class="navbar-text me-3">Bienvenido, {{ user.username }}</span>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#userModal" onclick="loadUserData()">Mi Perfil</a>
+                        </li>
+                        {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'assign_role' %}">Asignar Roles</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <form method="POST" action="{% url 'logout' %}" class="d-inline">
                                 {% csrf_token %}
@@ -52,7 +85,32 @@
         {% endblock %}
     </div>
 
+    <!-- Modal para mostrar datos del usuario -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel">Datos del Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nombre:</strong> <span id="username">{{ user.username }}</span></p>
+                    <p><strong>Email:</strong> <span id="useremail">{{ user.email }}</span></p>
+                    <p><strong>Rol:</strong> <span id="userrole">{{ user.role }}</span></p> <!-- Asegúrate de que 'role' esté disponible -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadUserData() {
+            // Si deseas hacer una llamada a la API para cargar datos, puedes hacerlo aquí.
+            // Por ejemplo, con fetch o AJAX.
+            // Actualmente, el modal ya carga datos directamente desde el contexto.
+        }
+    </script>
+    
     {% block extra_scripts %}
     {% endblock %}
 </body>
