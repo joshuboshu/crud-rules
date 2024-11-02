@@ -1,91 +1,145 @@
+/* Variables globales */
+:root {
+    --form-bg: #ffffff;
+    --form-border: #e5e7eb;
+    --form-shadow: rgba(0, 0, 0, 0.05);
+    --input-border: #d1d5db;
+    --input-focus: #2563eb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --primary-color: #2563eb;
+}
+
+/* Estilos del formulario */
 .card {
-    border: 1px solid #dee2e6; 
-    border-radius: 0.5rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    max-width: 600px; 
-    margin: auto; 
+    background: var(--form-bg);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--form-shadow);
+    transition: all 0.3s ease;
 }
 
-.card-body {
-    padding: 1.25rem; 
+.card:hover {
+    box-shadow: 0 8px 15px var(--form-shadow);
 }
 
-/* Estilo para los contenedores de las etiquetas y campos */
-.form-label-container {
-    display: flex;
-    flex-direction: column;
+.card-title {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1.75rem;
 }
 
-/* Estilo general para el formulario */
-.form-control {
-    display: block; 
-    width: 100%; 
-    padding: 0.75rem 1rem;
-    font-size: 1rem; 
-    line-height: 1.5; /* Altura de línea */
-    color: #495057; 
-    background-color: #fff; 
-    border: 1px solid #ced4da; 
-    border-radius: 0.5rem; 
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transiciones suaves */
-}
-
-/* Estilo para los campos de entrada en foco */
-.form-control:focus {
-    border-color: #007bff; 
-    outline: 0; /* Quitar el contorno por defecto */
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); 
-}
-
-/* Estilo específico para el campo de textarea */
-textarea.form-control {
-    resize: vertical; /* Permite cambiar el tamaño verticalmente */
-}
-
-/* Estilo para los checkboxes */
-.form-check-input {
-    margin-top: 0.3rem;
-    margin-right: 0.5rem;
-}
-
-/* Estilo para las etiquetas de los checkboxes */
-.form-check-label {
-    margin-left: 0.5rem;
-    font-weight: 400; 
-}
-
-/* Estilo para los labels y campos del formulario */
+/* Campos del formulario */
 .form-label {
-    display: block; 
+    color: var(--text-primary);
+    font-weight: 500;
     margin-bottom: 0.5rem;
-    font-weight: 500; 
 }
 
-/* Estilo para los errores del formulario */
-.form-errors {
-    color: #dc3545; 
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+.form-control {
+    border: 2px solid var(--form-border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
 }
 
-/* Estilo para el botón */
+.form-control:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea.form-control {
+    min-height: 120px;
+}
+
+/* Checkbox personalizado */
+.form-check {
+    margin: 1rem 0;
+}
+
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0.25em;
+    border: 2px solid var(--input-border);
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-label {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+/* Botones */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
 .btn-primary {
-    background-color: #007bff; 
-    border-color: #007bff;
-    border-radius: 0.5rem; 
+    background-color: var(--primary-color);
+    border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; 
-    border-color: #004085; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-/* Estilo para el enlace de volver a la lista */
 .btn-link {
-    color: #007bff; 
-    font-size: 1rem; 
+    color: var(--text-secondary);
+    text-decoration: none;
 }
 
 .btn-link:hover {
-    text-decoration: underline;
+    color: var(--primary-color);
+}
+
+/* Mensajes de error */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    color: var(--danger-color);
+    font-size: 0.9rem;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        margin: 1rem;
+    }
+
+    .form-control {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
 }

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize', 
     'productos_app', # Aplicación del proyecto
     'widget_tweaks',
     'rules', # Django rules
