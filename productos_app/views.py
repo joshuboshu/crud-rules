@@ -3,13 +3,6 @@ from .models import Producto, Caracteristica
 from .forms import ProductForm, CaracteristicaForm
 from django.contrib.auth.decorators import login_required
 from rules.contrib.views import permission_required as rules_permission_required
-from django.contrib import messages
-
-
-def custom_logout(request):
-    logout(request)
-    messages.success(request, "Has cerrado sesión exitosamente.")
-    return redirect('login')
 
 
 @login_required

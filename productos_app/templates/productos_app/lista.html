@@ -179,26 +179,26 @@
                         {% if producto.caracteristicas %}
                         <div class="characteristics-grid mt-2">
                             {% with caracteristicas_visible=producto.caracteristicas|slice:":5" %}
-                            {% for caracteristica in caracteristicas_visible %}
-                            <div class="characteristic-item">
-                                <dt class="characteristic-label">{{ caracteristica.nombre }}:</dt>
-                                <dd class="characteristic-value mb-0">{{ caracteristica.valor }}</dd>
-                            </div>
-                            {% endfor %}
-
-                            {% with remaining=producto.caracteristicas|length %}
-                            {% if remaining > 5 %}
-                            <div class="characteristic-item text-muted">
-                                <em>Y {{ remaining|add:"-5" }} más...</em>
-                            </div>
-                            {% endif %}
+                                {% for caracteristica in caracteristicas_visible %}
+                                    <div class="characteristic-item">
+                                        <dt class="characteristic-label">{{ caracteristica.nombre }}:</dt>
+                                        <dd class="characteristic-value mb-0">{{ caracteristica.valor }}</dd>
+                                    </div>
+                                {% endfor %}
                             {% endwith %}
+                            
+                            {% with remaining=producto.caracteristicas|length %}
+                                {% if remaining > 5 %}
+                                    <div class="characteristic-item text-muted">
+                                        <em>Y {{ remaining|add:"-5" }} más...</em>
+                                    </div>
+                                {% endif %}
                             {% endwith %}
                         </div>
-                        {% else %}
-                        <p class="product-description text-muted mb-2">{{ producto.descripcion|default:"Sin descripción
-                            disponible" }}</p>
-                        {% endif %}
+                    {% else %}
+                        <p class="product-description text-muted mb-2">{{ producto.descripcion|default:"Sin descripción disponible" }}</p>
+                    {% endif %}
+                    
 
                         <!-- Product Meta -->
                         <div class="product-meta mt-2">
