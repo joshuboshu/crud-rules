@@ -4,13 +4,17 @@ from .forms import ProductForm, CaracteristicaForm
 from django.contrib.auth.decorators import login_required
 from rules.contrib.views import permission_required as rules_permission_required
 
+def get_user(request):
+    return request.user
 
 @login_required
+@rules_permission_required('is_jean', fn=get_user)
 @rules_permission_required('productos_app.view_producto')
 def list_products(request):
     productos = Producto.objects.all()
     for producto in productos:
         producto.caracteristicas = Caracteristica.objects.filter(producto=producto)[:5]
+        
     return render(request, 'productos_app/lista.html', {'productos': productos})
 
 @login_required
