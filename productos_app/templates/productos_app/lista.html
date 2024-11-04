@@ -283,7 +283,7 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const productId = this.dataset.productId;
-                deleteForm.action = `/productos/delete/${productId}/`;
+                deleteForm.action = `{% url 'delete_product' 0 %}`.replace('0', productId);
             });
         });
     });

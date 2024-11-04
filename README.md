@@ -58,3 +58,20 @@ Es fundamental contar con estos requisitos para poder correr el proyecto:
     exec su -l $USER
     ```
     
+
+## Una vez aquí se pueden realizar todas las acciones que permite la aplicación
+
+### El administrador tiene acceso a la lista de productos, puede agregar mas productos, o bien, ver los detalles o eliminar productos
+![](./images/admin.png)
+
+### El usuario solo puede observar con los productos disponibles
+![](./images/user.png)
+
+### Se importó el decorador permission_required bajo el alias de rules_permission_required, utilizandolo con los rules del archivo permissions.py
+![](./images/views.png)
+
+### El archivo permissions.py declara las reglas que se aplicaran a los metodos de views
+![](./images/permissions.png)
+
+### Una muestra de como utilizar los rules en jinja2
+![](./images/template.png)
